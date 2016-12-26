@@ -61,7 +61,6 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
             country = (TextView)itemView.findViewById(R.id.country);
             capital = (TextView)itemView.findViewById(R.id.capital);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
-            //We'll need the container later on, when we add an View.OnClickListener
         }
     }
 }
