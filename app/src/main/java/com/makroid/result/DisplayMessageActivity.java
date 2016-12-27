@@ -58,7 +58,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
             anim = AnimationUtils.loadAnimation(this,R.anim.rotate);
         recView = (RecyclerView)findViewById(R.id.rec_list);
         recView.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new MyAdapter(DeepData.getData(),this);
+        try {
+            adapter = new MyAdapter(DeepData.getData(jsonObject),this);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         recView.setAdapter(adapter);
         SlideInRightAnimationAdapter alphaAdapter = new SlideInRightAnimationAdapter(adapter);
         recView.setAdapter(alphaAdapter);

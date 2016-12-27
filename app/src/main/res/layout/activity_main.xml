@@ -39,5 +39,27 @@
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
 
+    <RadioGroup
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_below="@+id/toolbar"
+        android:gravity="center"
+        android:layout_marginTop="60dp"
+        >
+        <RadioButton android:id="@+id/radio_pirates"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="First Sem"
+            android:checked="true"
+            android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_ninjas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Second Sem"
+            android:layout_marginLeft="45dp"
+            android:onClick="onRadioButtonClicked"/>
+    </RadioGroup>
+
 
 </RelativeLayout>

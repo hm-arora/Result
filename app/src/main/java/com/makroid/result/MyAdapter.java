@@ -49,8 +49,10 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
 //        else if(position%5==4)
 //            holder.cardView.setCardBackgroundColor(Color.parseColor("#634511"));
         ListItem item = listData.get(position);
-        holder.capital.setText(item.getCapital());
-        holder.country.setText(item.getCountry());
+        holder.exam_layout.setText(item.getexam());
+        holder.marks_layout.setText(item.getmarks());
+        holder.internal.setText(item.getinternal());
+        holder.external.setText(item.getexternal());
 //        setFadeAnimation(holder.container);
     }
 //    private void setFadeAnimation(View view) {
@@ -64,15 +66,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
     }
     class MyHolder extends RecyclerView.ViewHolder {
 
-        private TextView country,capital;
+        private TextView exam_layout,marks_layout,internal,external;
         private CardView cardView;
         private LinearLayout container;
 
         public MyHolder(View itemView) {
             super(itemView);
             container = (LinearLayout) itemView.findViewById(R.id.action_container);
-            country = (TextView)itemView.findViewById(R.id.country);
-            capital = (TextView)itemView.findViewById(R.id.capital);
+            exam_layout = (TextView)itemView.findViewById(R.id.exam_layout);
+            marks_layout = (TextView)itemView.findViewById(R.id.marks_layout);
+            internal = (TextView)itemView.findViewById(R.id.internal);
+            external = (TextView)itemView.findViewById(R.id.external);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }

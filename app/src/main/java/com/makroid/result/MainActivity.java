@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.TextView;
 
 import org.json.JSONException;
@@ -24,6 +25,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText ed;
     private Button btn;
+    private String link="https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/result.json";
     String message = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        Log.e("","asdasdsa");
         if(view.getId() == R.id.button){
             message = ed.getText().toString();
             new SimpleAsyncTask().execute("");
+        }
+    }
+
+    public void onRadioButtonClicked(View view) {
+        boolean checked = ((RadioButton) view).isChecked();
+
+        // Check which radio button was clicked
+        switch(view.getId()) {
+            case R.id.radio_pirates:
+                if (checked)
+                    link="https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/result.json";
+                    break;
+            case R.id.radio_ninjas:
+                if (checked)
+                    link="https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/2ndSem.json";
+                    break;
         }
     }
 
@@ -53,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String urlstring="";
             String value="";
             try {
-                urlstring = methodName();
+                urlstring = methodName(link);
                 try {
                     JSONObject jsonObject = new JSONObject(urlstring);
                     JSONObject Object = jsonObject.getJSONObject(message);
@@ -91,8 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    private static String methodName() throws IOException {
-        URL url = new URL("https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/file.json");
+    private static String methodName(String link) throws IOException {
+        URL url = new URL(link);
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
         urlConnection.addRequestProperty("User-Agent", "Mozilla/4.76");
         HttpURLConnection connection = urlConnection;
