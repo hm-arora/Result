@@ -25,8 +25,6 @@ public class ListItem {
     public String getmarks(){
         return marks;
     }
-
-
     public String getexternal() {
         return external;
     }

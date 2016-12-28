@@ -13,6 +13,7 @@ import java.util.List;
  */
 
 public class DeepData {
+    List<ListItem> data = new ArrayList<>();
     public static List<ListItem> getData(JSONObject jsonObject) throws JSONException {
         JSONObject value = (JSONObject) jsonObject.get("Exams");
         List<String> examList = new ArrayList<String>();
@@ -41,4 +42,5 @@ public class DeepData {
             }
         return data;
     }
+
 }
