@@ -120,7 +120,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-//         Handle item selection
         switch (item.getItemId()) {
             case R.id.rank:
                 Intent intent = new Intent(getBaseContext(), ThirdActivity.class);
