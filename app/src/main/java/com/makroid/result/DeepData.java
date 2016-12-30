@@ -31,7 +31,7 @@ public class DeepData {
             external.add(((String) ((JSONArray) value.get(key)).get(0)).split(" ")[2]);
         }
 
-        List<ListItem> data = new ArrayList<>();
+            List<ListItem> data = new ArrayList<>();
             for(int i=0;i<marks.size();i++){
                 ListItem item = new ListItem();
                 item.setexam(examList.get(i));

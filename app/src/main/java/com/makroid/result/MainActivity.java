@@ -4,10 +4,12 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.AsyncTask;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
+
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +29,8 @@ import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import static com.makroid.result.R.drawable.edittext;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText ed;
@@ -40,6 +46,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setTitle("Search");
         btn = (Button) findViewById(R.id.button);
         ed = (EditText) findViewById(R.id.EditText);
+        ed.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
+                        (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
+//                    Toast.makeText(MainActivity.this, ed.getText(), Toast.LENGTH_SHORT).show();
+                    message = ed.getText().toString();
+                    new SimpleAsyncTask().execute("");
+                    return true;
+                }
+                return false;
+            }
+        });
         btn.setOnClickListener(this);
     }
 
@@ -72,7 +92,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         @Override
         protected JSONObject doInBackground(String... strings) {
             String urlstring="";
-            String value="";
             try {
                 urlstring = methodName(link);
                 try {
@@ -90,11 +109,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         @Override
         protected void onPostExecute(JSONObject jsonObject) {
+            pdia.dismiss();
+
             if(jsonObject == null) {
-                pdia.dismiss();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Animation Dialog");
+                builder.setMessage("message");
+//                builder.setNegativeButton("OK", null);
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
+//                dialog.getButton(dialog.BUTTON_NEUTRAL).setBackgroundColor("#000");
+                dialog.show();
             }
             else {
-                pdia.dismiss();
                 Intent intent = new Intent(getBaseContext(), DisplayMessageActivity.class);
                 intent.putExtra("message", String.valueOf(jsonObject));
                 startActivity(intent);
