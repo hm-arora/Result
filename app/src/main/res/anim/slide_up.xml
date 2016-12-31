@@ -4,7 +4,7 @@
         android:duration="@android:integer/config_mediumAnimTime"
         android:fromYDelta="100%"
         android:interpolator="@android:anim/accelerate_interpolator"
-        android:toXDelta="0">
+        android:toYDelta="0">
     </translate>
     <alpha
         android:duration="2000"

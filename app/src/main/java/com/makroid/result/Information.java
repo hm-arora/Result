@@ -20,14 +20,7 @@ import static java.lang.StrictMath.round;
  * Created by himanshu on 12/28/16.
  */
 public class Information {
-    public static List<ListInformation> getSortedData(){
-        String link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/1stSem.json";
-        String urlstring = null;
-        try {
-            urlstring = methodName(link);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static ListAgainInformation getSortedData(String urlstring,String roll_number){
         JSONObject jsonObject = null;
         try {
             jsonObject = new JSONObject(urlstring);
@@ -43,25 +36,19 @@ public class Information {
         Collections.sort(data,new ListInformation());
 
 
-        ArrayList<String> simple = new ArrayList<>();
-        for(int i=0;i<data.size();i++)
-            data.get(i).setRank(i+1);
-//        return simple;
-        return data;
-    }
-
-    private static String methodName(String link) throws IOException {
-        URL url = new URL(link);
-        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-        urlConnection.addRequestProperty("User-Agent", "Mozilla/4.76");
-        HttpURLConnection connection = urlConnection;
-        BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        String urlString = "";
-        String current;
-        while ((current = in.readLine()) != null) {
-            urlString += current;
+        int pos = 0;
+        boolean find  = true;
+        for(int i=0;i<data.size();i++) {
+            data.get(i).setRank(i + 1);
+            if(roll_number.equals(data.get(i).getRoll()))
+               find = false;
+            if(find)
+                pos++;
         }
-        return urlString;
+        ListAgainInformation againInformation = new ListAgainInformation();
+        againInformation.setList(data);
+        againInformation.setPosition(pos);
+        return againInformation;
     }
 
     public static List<ListInformation> getData(JSONObject jsonObject) throws JSONException {

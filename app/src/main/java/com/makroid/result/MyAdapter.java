@@ -53,13 +53,12 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
         holder.marks_layout.setText(item.getmarks());
         holder.internal.setText(item.getinternal());
         holder.external.setText(item.getexternal());
-//        setFadeAnimation(holder.container);
+        Animation animation = AnimationUtils.loadAnimation(context,
+                (position > lastPosition) ? R.anim.bounce
+                        : R.anim.fade_in);
+        holder.itemView.startAnimation(animation);
+        lastPosition = position;
     }
-//    private void setFadeAnimation(View view) {
-//        AlphaAnimation anim = new AlphaAnimation(0.0f, 1.0f);
-//        anim.setDuration(1000);
-//        view.startAnimation(anim);
-//    }
     @Override
     public int getItemCount() {
         return listData.size();
@@ -67,17 +66,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
     class MyHolder extends RecyclerView.ViewHolder {
 
         private TextView exam_layout,marks_layout,internal,external;
-        private CardView cardView;
-        private LinearLayout container;
 
         public MyHolder(View itemView) {
             super(itemView);
-            container = (LinearLayout) itemView.findViewById(R.id.action_container);
             exam_layout = (TextView)itemView.findViewById(R.id.exam_layout);
             marks_layout = (TextView)itemView.findViewById(R.id.marks_layout);
             internal = (TextView)itemView.findViewById(R.id.internal);
             external = (TextView)itemView.findViewById(R.id.external);
-            cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }
 
