@@ -1,9 +1,6 @@
-package com.makroid.result;
-
-import org.json.JSONObject;
+package com.makroid.result.InformationClass;
 
 import java.util.Comparator;
-import java.util.List;
 
 /**
  * Created by himanshu on 12/28/16.

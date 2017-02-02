@@ -1,4 +1,4 @@
-package com.makroid.result;
+package com.makroid.result.InformationClass;
 
 import org.json.JSONArray;
 import org.json.JSONException;

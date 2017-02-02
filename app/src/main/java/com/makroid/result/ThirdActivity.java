@@ -2,23 +2,34 @@ package com.makroid.result;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.TextView;
+
+import com.makroid.result.InformationClass.Information;
+import com.makroid.result.InformationClass.ListAgainInformation;
+import com.makroid.result.InformationClass.ListInformation;
+import com.makroid.result.adapters.RankAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
-public class ThirdActivity extends AppCompatActivity {
+public class ThirdActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private static final String JSON = "JSONOBJECT";
     Toolbar toolbar;
     ListView listView;
     int position = 0;
-    //        ArrayAdapter<String> adapter;
     private ProgressDialog pdia;
 
     private RecyclerView recyclerView;
@@ -38,7 +49,7 @@ public class ThirdActivity extends AppCompatActivity {
         }
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Total Marks");
+        getSupportActionBar().setTitle("Rank");
         roll = getIntent().getExtras().getString("test");
         listView = (ListView) findViewById(R.id.list_item);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
@@ -53,12 +64,22 @@ public class ThirdActivity extends AppCompatActivity {
             pdia.dismiss();
     }
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        final List<ListInformation> filteredModelList = filter(list, newText);
+        rankAdapter.setFilter(filteredModelList);
+        return false;
+    }
+
     public class ThirdAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-//            stringArrayList = Information.getSortedData(urlstirng,roll);
-//            list = (List<ListInformation>) stringArrayList.get(1);
             ListAgainInformation listAgainInformation = Information.getSortedData(urlstirng, roll);
             position = listAgainInformation.getPosition();
             list = listAgainInformation.getList();
@@ -68,15 +89,12 @@ public class ThirdActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
             if (pdia != null)
                 pdia.dismiss();
-            super.onPostExecute(aVoid);
             recyclerView.setAdapter(rankAdapter);
-//            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ThirdActivity.this);
-            recyclerView.setLayoutManager(new LinearLayoutManagerWithSmoothScroller(ThirdActivity.this));
+            recyclerView.setLayoutManager(new LinearLayoutManager(ThirdActivity.this));
             recyclerView.getLayoutManager().scrollToPosition(position);
-//            recyclerView.smoothScrollToPosition(position);
-//            linearLayoutManager.scrollToPositionWithOffset(position, 20);
         }
 
         @Override
@@ -86,7 +104,6 @@ public class ThirdActivity extends AppCompatActivity {
             pdia.setMessage("Fetching data");
             pdia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pdia.show();
-//
         }
     }
 
@@ -94,6 +111,11 @@ public class ThirdActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_third, menu);
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        TextView textView = (TextView) searchView.findViewById(R.id.search_src_text);
+        textView.setTextColor(Color.WHITE);
+        searchView.setOnQueryTextListener(this);
         return true;
     }
 
@@ -105,5 +127,15 @@ public class ThirdActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    private List<ListInformation> filter(List<ListInformation> models, String query) {
+        query = query.toLowerCase();final List<ListInformation> filteredModelList = new ArrayList<>();
+        for (ListInformation model : models) {
+            final String text = model.getName().toLowerCase();
+            if (text.contains(query)) {
+                filteredModelList.add(model);
+            }
+        }
+        return filteredModelList;
     }
 }

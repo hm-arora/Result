@@ -1,4 +1,4 @@
-package com.makroid.result;
+package com.makroid.result.applicationClass;
 
 import android.app.Application;
 

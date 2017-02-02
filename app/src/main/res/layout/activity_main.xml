@@ -47,6 +47,12 @@
             android:text="Second Sem"
             android:layout_marginLeft="45dp"
             android:onClick="onRadioButtonClicked"/>
+        <RadioButton android:id="@+id/radio_bcom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BCOM"
+            android:layout_marginLeft="45dp"
+            android:onClick="onRadioButtonClicked"/>
     </RadioGroup>
 
     <Button

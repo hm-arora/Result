@@ -1,10 +1,7 @@
-package com.makroid.result;
+package com.makroid.result.InformationClass;
 
 import java.util.List;
 
-/**
- * Created by himanshu on 12/31/16.
- */
 
 public class ListAgainInformation {
     List<ListInformation> listInformation;

@@ -15,6 +15,10 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.RelativeLayout;
 
+import com.makroid.result.InformationClass.DeepData;
+import com.makroid.result.InformationClass.ListItem;
+import com.makroid.result.adapters.ResultAdapter;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,7 +35,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     List<ListItem> data = new ArrayList<>();
     JSONObject jsonObject;
     private RecyclerView recView;
-    private MyAdapter adapter;
+    private ResultAdapter adapter;
     Animation anim;
     String message="";
 
@@ -76,19 +80,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
 //        } catch (NoSuchFieldException e) {
 //        } catch (IllegalAccessException e) {
 //        }
-        Random r = new Random();
-        int Low = 1;
-        int High = 3;
-        int Result = r.nextInt(High-Low) + Low;
-        if(Result==1)
-            anim = AnimationUtils.loadAnimation(this, R.anim.bounce);
-        else
-            anim = AnimationUtils.loadAnimation(this,R.anim.rotate);
+        anim = AnimationUtils.loadAnimation(this, R.anim.bounce);
         recView = (RecyclerView)findViewById(R.id.rec_list);
         recView.setLayoutManager(new LinearLayoutManager(this));
         try {
             data = DeepData.getData(jsonObject); // used to get the data
-            adapter = new MyAdapter(data,this);
+            adapter = new ResultAdapter(data,this);
         } catch (JSONException e) {
             e.printStackTrace();
         }

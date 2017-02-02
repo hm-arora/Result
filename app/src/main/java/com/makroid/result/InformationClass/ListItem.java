@@ -1,4 +1,4 @@
-package com.makroid.result;
+package com.makroid.result.InformationClass;
 
 /**
  * Created by himanshu on 12/25/16.

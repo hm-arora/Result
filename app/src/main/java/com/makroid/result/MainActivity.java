@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onRadioButtonClicked(View view) {
         boolean checked = ((RadioButton) view).isChecked();
 
-        // Check which radio button was clicked
         switch (view.getId()) {
             case R.id.radio_pirates:
                 if (checked)
@@ -78,6 +77,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.radio_ninjas:
                 if (checked)
                     link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/2ndSem.json";
+                break;
+            case R.id.radio_bcom:
+                if (checked)
+                    link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/BCOM.json";
                 break;
         }
     }
@@ -112,16 +115,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             if (jsonObject == null) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Animation Dialog");
-                builder.setMessage("message");
-//                builder.setNegativeButton("OK", null);
+                builder.setTitle("Enroll.Number not Found");
+                builder.setMessage("Try Again");
+                builder.setNegativeButton("OK", null);
                 AlertDialog dialog = builder.create();
-                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
-//                dialog.getButton(dialog.BUTTON_NEUTRAL).setBackgroundColor("#000");
+//                dialog.getWindow().getAttributes().windowAnimations = R.style.DialogAnimation_2;
                 dialog.show();
             } else {
-//                MyApplication mApp = ((MyApplication) getBaseContext());
-//                mApp.setSomeVariable(jsonObject);
                 Intent intent = new Intent(getBaseContext(), DisplayMessageActivity.class);
                 intent.putExtra("message", message);
                 startActivity(intent);
