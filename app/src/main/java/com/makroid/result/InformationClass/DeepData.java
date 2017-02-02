@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/**
- * Created by himanshu on 12/25/16.
- */
-
 public class DeepData {
     public static List<ListItem> getData(JSONObject jsonObject) throws JSONException {
         JSONObject value = (JSONObject) jsonObject.get("Exams");

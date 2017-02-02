@@ -5,7 +5,7 @@ package com.makroid.result.InformationClass;
  */
 
 public class ListItem {
-    String exam,marks,internal,external;
+    String exam,marks,internal,external,college;
     public void setexam(String exam){
         this.exam = exam;
     }
@@ -28,7 +28,6 @@ public class ListItem {
     public String getexternal() {
         return external;
     }
-
     public String getinternal() {
         return internal;
     }

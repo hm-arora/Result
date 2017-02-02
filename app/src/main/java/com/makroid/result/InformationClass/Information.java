@@ -11,9 +11,6 @@ import java.util.List;
 
 import static java.lang.StrictMath.round;
 
-/**
- * Created by himanshu on 12/28/16.
- */
 public class Information {
     public static ListAgainInformation getSortedData(String urlstring,String roll_number){
         JSONObject jsonObject = null;
@@ -62,7 +59,9 @@ public class Information {
             double percentage = round(((double) total_marks / (double) total_subjects),2);
             double credit_percentage = round(((double)credit_marks / (double)credits),2);
             String name = jsonObject.getJSONObject(key).getString("name");
+            String college = jsonObject.getJSONObject(key).getString("college");
             listInformation.setName(name);
+            listInformation.setCollege(college);
             listInformation.setRoll(key);
             listInformation.setTotalMarks(total_marks);
             listInformation.setCreditMarks(credit_marks);

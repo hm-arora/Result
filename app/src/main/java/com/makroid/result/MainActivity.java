@@ -28,7 +28,7 @@ import java.net.URL;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText ed;
     private Button btn;
-    private String link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/1stSem.json";
+    private String link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/1stSem.json";
     String message = "";
     final String JSON = "JSONOBJECT" ;
 
@@ -72,15 +72,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch (view.getId()) {
             case R.id.radio_pirates:
                 if (checked)
-                    link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/1stSem.json";
+                    link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/1stSem.json";
                 break;
             case R.id.radio_ninjas:
                 if (checked)
-                    link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/2ndSem.json";
+                    link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/2ndSem.json";
                 break;
             case R.id.radio_bcom:
                 if (checked)
-                    link = "https://raw.githubusercontent.com/Himanshuarora97/HelloWorld/master/BCOM.json";
+                    link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/BCOM.json";
                 break;
         }
     }
@@ -135,7 +135,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             pdia.setMessage("Fetching data");
             pdia.setProgressStyle(ProgressDialog.STYLE_SPINNER);
             pdia.show();
-//
         }
     }
 

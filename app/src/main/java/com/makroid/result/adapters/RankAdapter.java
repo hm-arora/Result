@@ -51,6 +51,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
         holder.percentage.setText("Percetage : " + String.valueOf(item.getPercentage()) + "%");
         holder.creditpercentage.setText("Credit Percentage : " + String.valueOf(item.getCreditPercentage()) + "%");
         holder.name.setText(item.getName());
+        holder.collegename.setText(item.getCollege());
         holder.marks.setText("Total Marks: "+String.valueOf(item.getTotalMarks()));
         Animation animation = AnimationUtils.loadAnimation(context,
                 (position > lastPosition) ? R.anim.up_from_bottom
@@ -73,7 +74,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
 
     class MyHolder extends RecyclerView.ViewHolder {
 
-        private TextView name,marks,percentage,creditpercentage,rank;
+        private TextView name,marks,percentage,creditpercentage,rank,collegename;
         private CardView cardView;
         Context ctx;
         public MyHolder(View itemView) {
@@ -84,6 +85,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
             creditpercentage = (TextView)itemView.findViewById(R.id.creditpercentage);
            percentage = (TextView)itemView.findViewById(R.id.percentage);
             name = (TextView)itemView.findViewById(R.id.name_layout);
+            collegename = (TextView)itemView.findViewById(R.id.college);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
     }

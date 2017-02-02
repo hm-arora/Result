@@ -80,6 +80,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 
         @Override
         protected Void doInBackground(Void... voids) {
+            // Used to get Sorted object
             ListAgainInformation listAgainInformation = Information.getSortedData(urlstirng, roll);
             position = listAgainInformation.getPosition();
             list = listAgainInformation.getList();

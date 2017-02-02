@@ -8,6 +8,7 @@ import java.util.Comparator;
 public class ListInformation implements Comparator<ListInformation>{
     String roll;
     String name;
+    String college;
     int total_marks;
     int creadit_marks;
     double percentage;
@@ -22,6 +23,9 @@ public class ListInformation implements Comparator<ListInformation>{
     public void setRoll(String roll) {
         this.roll = roll;
     }
+
+    public void setCollege(String college){this.college = college;}
+
 
     public void setTotalMarks(int totalMarks) {
         this.total_marks = totalMarks;
@@ -54,6 +58,7 @@ public class ListInformation implements Comparator<ListInformation>{
     public int getCreaditMarks(){
         return  creadit_marks;
     }
+    public String getCollege(){return college;}
     public double getPercentage(){
         return percentage;
     }
