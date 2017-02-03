@@ -112,12 +112,25 @@ public class DisplayMessageActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.rank:
+            case R.id.overall_rank:
+                ArrayList<String> arrayList = new ArrayList<>();
+                arrayList.add(message);
+                arrayList.add("overall");
                 Intent intent = new Intent(getBaseContext(), ThirdActivity.class);
-                intent.putExtra("test", message);
+                intent.putStringArrayListExtra("test", arrayList);
                 startActivity(intent);
                 finish(); // therefore it never come after this from back button
                 return true;
+            case R.id.college_rank:
+                arrayList = new ArrayList<>();
+                arrayList.add(message);
+                arrayList.add("college");
+                intent = new Intent(getBaseContext(), ThirdActivity.class);
+                intent.putStringArrayListExtra("test", arrayList);
+                startActivity(intent);
+                finish(); // therefore it never come after this from back button
+                return true;
+
             case android.R.id.home:
                 onBackPressed();
                 return true;

@@ -37,6 +37,8 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     List<ListInformation> list;
     String urlstirng = "";
     String roll = "";
+    String rank_system="";
+    ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +52,9 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Rank");
-        roll = getIntent().getExtras().getString("test");
+        arrayList = getIntent().getStringArrayListExtra("test");
+        roll = arrayList.get(0);
+        rank_system = arrayList.get(1);
         listView = (ListView) findViewById(R.id.list_item);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         new ThirdAsyncTask().execute();
@@ -81,7 +85,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         @Override
         protected Void doInBackground(Void... voids) {
             // Used to get Sorted object
-            ListAgainInformation listAgainInformation = Information.getSortedData(urlstirng, roll);
+            ListAgainInformation listAgainInformation = Information.getSortedData(urlstirng, roll,rank_system);
             position = listAgainInformation.getPosition();
             list = listAgainInformation.getList();
             rankAdapter = new RankAdapter(list, getBaseContext());

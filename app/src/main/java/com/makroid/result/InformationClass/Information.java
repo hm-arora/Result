@@ -12,8 +12,9 @@ import java.util.List;
 import static java.lang.StrictMath.round;
 
 public class Information {
-    public static ListAgainInformation getSortedData(String urlstring,String roll_number){
+    public static ListAgainInformation getSortedData(String urlstring,String roll_number,String rank_system){
         JSONObject jsonObject = null;
+        String collegeName = "null";
         try {
             jsonObject = new JSONObject(urlstring);
         } catch (JSONException e) {
@@ -21,7 +22,12 @@ public class Information {
         }
         List<ListInformation> data = null;
         try {
-            data = getData(jsonObject);
+            if(rank_system.equals("college")) {
+                collegeName = jsonObject.getJSONObject(roll_number).getString("college");
+                data = getData(jsonObject,collegeName);
+            }
+            else
+                data = getData(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -75,6 +81,40 @@ public class Information {
         return data;
     }
 
+    public static List<ListInformation> getData(JSONObject jsonObject,String collegeName) throws JSONException {
+//        int i = 0;
+        List<ListInformation> data = new ArrayList<>();
+        for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
+            ListInformation listInformation = new ListInformation();
+            String key = it.next();
+            JSONObject object = jsonObject.getJSONObject(key).getJSONObject("Exams");
+            Integer[] scheme = TotalMarks(object);
+//            System.out.println(key);
+            int credits = 27;
+            int total_marks = scheme[0];
+            int credit_marks = scheme[1];
+            int total_subjects = scheme[2];
+            double percentage = round(((double) total_marks / (double) total_subjects), 2);
+            double credit_percentage = round(((double) credit_marks / (double) credits), 2);
+            String name = jsonObject.getJSONObject(key).getString("name");
+            String college = jsonObject.getJSONObject(key).getString("college");
+
+            if(college.equals(collegeName)) {
+                listInformation.setName(name);
+                listInformation.setCollege(college);
+                listInformation.setRoll(key);
+                listInformation.setTotalMarks(total_marks);
+                listInformation.setCreditMarks(credit_marks);
+                listInformation.setPercentage(percentage);
+                listInformation.setCreditPercentage(credit_percentage);
+                data.add(listInformation);
+            }
+//            i++;
+//            if(i==5)
+//                break;
+        }
+        return data;
+    }
     public static Integer[] TotalMarks(JSONObject value) throws JSONException {
         String regex = "\\(.+\\)";
         ArrayList<String> examList = new ArrayList<>();
