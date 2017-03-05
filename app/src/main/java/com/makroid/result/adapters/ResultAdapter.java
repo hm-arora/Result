@@ -14,9 +14,6 @@ import com.makroid.result.R;
 
 import java.util.List;
 
-/**
- * Created by himanshu on 12/25/16.
- */
 
 public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyHolder> {
     private Context context;
@@ -37,16 +34,6 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyHolder> 
 
     @Override
     public void onBindViewHolder(MyHolder holder, int position) {
-//        if(position % 5 == 0)
-//            holder.cardView.setCardBackgroundColor(Color.RED);
-//        else if(position%5==1)
-//            holder.cardView.setCardBackgroundColor(Color.BLACK);
-//        else if(position%5==2)
-//            holder.cardView.setCardBackgroundColor(Color.parseColor("#789456"));
-//        else if(position%5==3)
-//            holder.cardView.setCardBackgroundColor(Color.parseColor("#241234"));
-//        else if(position%5==4)
-//            holder.cardView.setCardBackgroundColor(Color.parseColor("#634511"));
         ListItem item = listData.get(position);
         holder.exam_layout.setText(item.getexam());
         holder.marks_layout.setText(item.getmarks());
@@ -60,7 +47,7 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyHolder> 
     }
     @Override
     public int getItemCount() {
-        return listData.size();
+        return listData.size()-1;
     }
     class MyHolder extends RecyclerView.ViewHolder {
 

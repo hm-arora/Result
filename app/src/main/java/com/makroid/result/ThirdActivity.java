@@ -18,8 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.makroid.result.InformationClass.Information;
-import com.makroid.result.InformationClass.ListAgainInformation;
-import com.makroid.result.InformationClass.ListInformation;
+import com.makroid.result.InformationClass.RankModel;
 import com.makroid.result.adapters.RankAdapter;
 
 import java.util.ArrayList;
@@ -34,7 +33,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 
     private RecyclerView recyclerView;
     private RankAdapter rankAdapter;
-    List<ListInformation> list;
+    List<RankModel> list;
     String urlstirng = "";
     String roll = "";
     String rank_system="";
@@ -44,20 +43,22 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
+        String link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/2ndSem.json";
         SharedPreferences settings = getSharedPreferences(JSON, 0);
-        String FILENAME = settings.getString("myFileName", "");
-        if (!FILENAME.isEmpty()) {
-            urlstirng = FILENAME;
-        }
+//        String FILENAME = settings.getString(link, "");
+//        if (!FILENAME.isEmpty()) {
+//            urlstirng = FILENAME;
+//        }
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("Rank");
         arrayList = getIntent().getStringArrayListExtra("test");
-        roll = arrayList.get(0);
-        rank_system = arrayList.get(1);
+        urlstirng = settings.getString(arrayList.get(0),"");
+        roll = arrayList.get(1);
+        rank_system = arrayList.get(2);
         listView = (ListView) findViewById(R.id.list_item);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-        new ThirdAsyncTask().execute();
+            new ThirdAsyncTask().execute();
     }
 
     @Override
@@ -75,7 +76,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        final List<ListInformation> filteredModelList = filter(list, newText);
+        final List<RankModel> filteredModelList = filter(list, newText);
         rankAdapter.setFilter(filteredModelList);
         return false;
     }
@@ -84,10 +85,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 
         @Override
         protected Void doInBackground(Void... voids) {
-            // Used to get Sorted object
-            ListAgainInformation listAgainInformation = Information.getSortedData(urlstirng, roll,rank_system);
-            position = listAgainInformation.getPosition();
-            list = listAgainInformation.getList();
+            list = Information.getSortedData(urlstirng,roll,rank_system);
             rankAdapter = new RankAdapter(list, getBaseContext());
             return null;
         }
@@ -99,7 +97,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
                 pdia.dismiss();
             recyclerView.setAdapter(rankAdapter);
             recyclerView.setLayoutManager(new LinearLayoutManager(ThirdActivity.this));
-            recyclerView.getLayoutManager().scrollToPosition(position);
+//            recyclerView.getLayoutManager().scrollToPosition(position);
         }
 
         @Override
@@ -133,9 +131,10 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
                 return super.onOptionsItemSelected(item);
         }
     }
-    private List<ListInformation> filter(List<ListInformation> models, String query) {
-        query = query.toLowerCase();final List<ListInformation> filteredModelList = new ArrayList<>();
-        for (ListInformation model : models) {
+    private List<RankModel> filter(List<RankModel> models, String query) {
+        query = query.toLowerCase();
+        final List<RankModel> filteredModelList = new ArrayList<>();
+        for (RankModel model : models) {
             final String text = model.getName().toLowerCase();
             if (text.contains(query)) {
                 filteredModelList.add(model);

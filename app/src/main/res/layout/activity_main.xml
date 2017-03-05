@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/activity_main"
+    android:id="@+id/relative"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.makroid.result.MainActivity">
@@ -22,39 +22,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="115dp"
         android:background="@drawable/edittext"
-        android:hint="Enter the roll number"
+        android:hint="@string/editHint"
         android:id="@+id/EditText"
         android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true" />
-
-    <RadioGroup
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_below="@+id/toolbar"
-        android:gravity="center"
-        android:layout_marginTop="60dp"
-        >
-        <RadioButton android:id="@+id/radio_pirates"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="First Sem"
-            android:checked="true"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_ninjas"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Second Sem"
-            android:layout_marginLeft="45dp"
-            android:onClick="onRadioButtonClicked"/>
-        <RadioButton android:id="@+id/radio_bcom"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="BCOM"
-            android:layout_marginLeft="45dp"
-            android:onClick="onRadioButtonClicked"/>
-    </RadioGroup>
-
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,7 +33,7 @@
         android:paddingRight="80dp"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:text="Submit"
+        android:text="@string/submit"
         android:id="@+id/button"
         android:textColor="@color/colorAccent"
         android:theme="@style/MyButton"

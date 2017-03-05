@@ -7,7 +7,7 @@
     <dimen name="detail_backdrop_height">250dp</dimen>
     <dimen name="backdrop_title">30dp</dimen>
     <dimen name="backdrop_subtitle">18dp</dimen>
-    <dimen name="card_margin">5dp</dimen>
+    <dimen name="card_margin">3dp</dimen>
     <dimen name="card_album_radius">0dp</dimen>
     <dimen name="album_cover_height">160dp</dimen>
     <dimen name="album_title_padding">10dp</dimen>
@@ -17,4 +17,9 @@
     <dimen name="ic_album_overflow_width">20dp</dimen>
     <dimen name="ic_album_overflow_height">30dp</dimen>
     <dimen name="ic_album_overflow_margin_top">10dp</dimen>
+    <dimen name="tool_bar_text_size">22sp</dimen>
+    <dimen name="main_screen_side_padding">10dp</dimen>
+    <dimen name="text_top_padding">25dp</dimen>
+    <dimen name="title_text_size">26sp</dimen>
+    <dimen name="tool_bar_height">56dp</dimen>
 </resources>

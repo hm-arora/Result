@@ -8,10 +8,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class DeepData {
-    public static List<ListItem> getData(JSONObject jsonObject) throws JSONException {
-        JSONObject value = (JSONObject) jsonObject.get("Exams");
-        List<String> examList = new ArrayList<String>();
+public class Model {
+    public static List<ListItem> getData(String jsonObjectString,String roll) throws JSONException {
+        JSONObject jsonObject = new JSONObject(jsonObjectString).getJSONObject(roll);
+        JSONObject value = (JSONObject) jsonObject.get("exams");
+        List<String> examList = new ArrayList<>();
         for (Iterator<String> it = value.keys(); it.hasNext(); ) {
             String key = it.next();
             examList.add(key);
@@ -30,7 +31,7 @@ public class DeepData {
             for(int i=0;i<marks.size();i++){
                 ListItem item = new ListItem();
                 item.setexam(examList.get(i));
-                item.setmarks("Total Marks : " + marks.get(i));
+                item.setmarks("Marks : " + marks.get(i));
                 item.setinternal("Internal : "+internal.get(i));
                 item.setexternal("External : "+external.get(i));
                 data.add(item);

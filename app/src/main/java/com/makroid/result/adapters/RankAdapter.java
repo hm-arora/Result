@@ -9,22 +9,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.makroid.result.DisplayMessageActivity;
-import com.makroid.result.InformationClass.ListInformation;
+import com.makroid.result.InformationClass.RankModel;
+import com.makroid.result.MainActivity;
 import com.makroid.result.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
-    private List<ListInformation> listData;
+    private List<RankModel> listData;
     private LayoutInflater inflater;
     private Context context;
     int lastPosition = -1;
-    public RankAdapter(List<ListInformation> dataFromlist, Context c){
+    public RankAdapter(List<RankModel> dataFromlist, Context c){
         this.context = c;
         inflater = LayoutInflater.from(c);
         this.listData = dataFromlist;
@@ -34,19 +33,22 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
         View view = inflater.inflate(R.layout.single_row, parent, false);
         return new MyHolder(view);
     }
-
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
         holder.cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                    Intent intent = new Intent(context,DisplayMessageActivity.class);
-                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    intent.putExtra("message",listData.get(position).getRoll());
-                    context.startActivity(intent);
+                Intent intent =  new Intent(context,MainActivity.class);
+                intent.putExtra("roll",listData.get(position).getRoll());
+                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                context.startActivity(intent);
+//                    Intent intent = new Intent(context,DisplayMessageActivity.class);
+//                    intent.putExtra("message",listData.get(position).getRoll());
+//                    context.startActivity(intent);
             }
         });
-        ListInformation item = listData.get(position);
+        RankModel item = listData.get(position);
         holder.rank.setText(item.getRank());
         holder.percentage.setText("Percetage : " + String.valueOf(item.getPercentage()) + "%");
         holder.creditpercentage.setText("Credit Percentage : " + String.valueOf(item.getCreditPercentage()) + "%");
@@ -66,7 +68,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
     public int getItemCount() {
         return listData.size();
     }
-    public void setFilter(List<ListInformation> countryModels) {
+    public void setFilter(List<RankModel> countryModels) {
         listData = new ArrayList<>();
         listData.addAll(countryModels);
         notifyDataSetChanged();
