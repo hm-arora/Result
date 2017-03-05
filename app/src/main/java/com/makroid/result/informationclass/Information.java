@@ -1,8 +1,6 @@
-package com.makroid.result.InformationClass;
+package com.makroid.result.informationclass;
 
-import android.util.Log;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,12 +9,11 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import static java.lang.StrictMath.round;
 
 public class Information {
-    public static List<RankModel> getSortedData(String urlstring, String roll_number, String rank_system){
+    public static List<RankModel> getSortedData(String urlstring, String roll_number, String rank_system) {
         JSONObject jsonObject = null;
-        String collegeName = "null";
+        String collegeName;
         try {
             jsonObject = new JSONObject(urlstring);
         } catch (JSONException e) {
@@ -24,16 +21,16 @@ public class Information {
         }
         List<RankModel> data = new ArrayList<>();
         try {
-            if(rank_system.equals("college")) {
+            if (rank_system.equals("college")) {
+                assert jsonObject != null;
                 collegeName = jsonObject.getJSONObject(roll_number).getString("college");
-                data = getData(jsonObject,collegeName);
-            }
-            else
+                data = getData(jsonObject, collegeName);
+            } else
                 data = getData(jsonObject);
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Collections.sort(data,new RankModel());
+        Collections.sort(data, new RankModel());
         return data;
     }
 
@@ -55,13 +52,13 @@ public class Information {
                 newData.setCreditPercentage(creditPercentage);
                 newData.setTotalMarks(total);
                 newData.setRank(uRank);
+                data.add(newData);
             }
-            data.add(newData);
         }
         return data;
     }
 
-    public static List<RankModel> getData(JSONObject jsonObject) throws JSONException {
+    private static List<RankModel> getData(JSONObject jsonObject) throws JSONException {
         List<RankModel> data = new ArrayList<>();
         for (Iterator<String> it = jsonObject.keys(); it.hasNext(); ) {
             RankModel newData = new RankModel();

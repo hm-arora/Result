@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.makroid.result.InformationClass.ListItem;
+import com.makroid.result.informationclass.ListItem;
 import com.makroid.result.R;
 
 import java.util.List;
@@ -21,11 +21,13 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyHolder> 
     private int lastPosition = -1;
     private List<ListItem> listData;
     private LayoutInflater inflater;
-    public ResultAdapter(List<ListItem> dataFromlist, Context c){
+
+    public ResultAdapter(List<ListItem> dataFromlist, Context c) {
         this.context = c;
         inflater = LayoutInflater.from(c);
         this.listData = dataFromlist;
     }
+
     @Override
     public ResultAdapter.MyHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.list_row, parent, false);
@@ -45,20 +47,22 @@ public class ResultAdapter extends RecyclerView.Adapter<ResultAdapter.MyHolder> 
         holder.itemView.startAnimation(animation);
         lastPosition = position;
     }
+
     @Override
     public int getItemCount() {
-        return listData.size()-1;
+        return listData.size() - 1;
     }
+
     class MyHolder extends RecyclerView.ViewHolder {
 
-        private TextView exam_layout,marks_layout,internal,external;
+        private TextView exam_layout, marks_layout, internal, external;
 
         public MyHolder(View itemView) {
             super(itemView);
-            exam_layout = (TextView)itemView.findViewById(R.id.exam_layout);
-            marks_layout = (TextView)itemView.findViewById(R.id.marks_layout);
-            internal = (TextView)itemView.findViewById(R.id.internal);
-            external = (TextView)itemView.findViewById(R.id.external);
+            exam_layout = (TextView) itemView.findViewById(R.id.exam_layout);
+            marks_layout = (TextView) itemView.findViewById(R.id.marks_layout);
+            internal = (TextView) itemView.findViewById(R.id.internal);
+            external = (TextView) itemView.findViewById(R.id.external);
         }
     }
 

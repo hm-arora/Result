@@ -1,18 +1,18 @@
-package com.makroid.result.InformationClass;
+package com.makroid.result.informationclass;
 
 public class ListItem {
     private String exam,marks,internal,external;
-    public void setexam(String exam){
+    void setexam(String exam){
         this.exam = exam;
     }
-    public void setmarks(String marks){
+    void setmarks(String marks){
         this.marks = marks;
     }
-    public void setexternal(String external) {
+    void setexternal(String external) {
         this.external = external;
     }
 
-    public void setinternal(String internal) {
+    void setinternal(String internal) {
         this.internal = internal;
     }
     public String getexam(){

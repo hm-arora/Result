@@ -33,12 +33,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
     ViewPagerAdapter adapter;
     String college;
     ProgressDialog progressDialog;
-    Runnable runnable = new Runnable() {
-        @Override
-        public void run() {
-
-        }
-    };
     private Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +67,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 for (int i=1;i<=arrayList.size();i++) {
                     Log.e(TAG,"working or not " + i);
                     FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(0));
-                    adapter.addFragment(fragmentActivity,(0+i)+" Semester");
+                    adapter.addFragment(fragmentActivity,i +" Semester");
                 }
                 adapter.notifyDataSetChanged();
             }
@@ -84,7 +78,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(Title);
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setTitle(Title);
         getSupportActionBar().setSubtitle("( "+message+" )");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);

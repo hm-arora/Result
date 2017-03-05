@@ -17,8 +17,8 @@ import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.makroid.result.InformationClass.Information;
-import com.makroid.result.InformationClass.RankModel;
+import com.makroid.result.informationclass.Information;
+import com.makroid.result.informationclass.RankModel;
 import com.makroid.result.adapters.RankAdapter;
 
 import java.util.ArrayList;
@@ -28,7 +28,6 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     private static final String JSON = "JSONOBJECT";
     Toolbar toolbar;
     ListView listView;
-    int position = 0;
     private ProgressDialog pdia;
 
     private RecyclerView recyclerView;
@@ -43,7 +42,6 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        String link = "https://raw.githubusercontent.com/Himanshuarora97/IPU-Result/master/JsonFiles/2ndSem.json";
         SharedPreferences settings = getSharedPreferences(JSON, 0);
 //        String FILENAME = settings.getString(link, "");
 //        if (!FILENAME.isEmpty()) {
@@ -51,7 +49,8 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 //        }
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("Rank");
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setTitle("Rank");
         arrayList = getIntent().getStringArrayListExtra("test");
         urlstirng = settings.getString(arrayList.get(0),"");
         roll = arrayList.get(1);
@@ -81,7 +80,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         return false;
     }
 
-    public class ThirdAsyncTask extends AsyncTask<Void, Void, Void> {
+    private class ThirdAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
