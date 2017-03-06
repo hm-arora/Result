@@ -84,7 +84,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
 		public void onClick(View view) {
 			Intent intent = new Intent(context, MainActivity.class);
 			intent.putExtra("roll", listData.get(getAdapterPosition()).getRoll());
-			Log.e("Rank Adapter : ",listData.get(getAdapterPosition()).getRoll());
+			Log.e("Rank Adapter : ", String.valueOf(listData.get(getAdapterPosition()).getRoll().length()));
 			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 			context.startActivity(intent);
 		}

@@ -11,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -85,7 +86,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         @Override
         protected Void doInBackground(Void... voids) {
             list = Information.getSortedData(urlstirng,roll,rank_system);
-            rankAdapter = new RankAdapter(list, getBaseContext());
+            rankAdapter = new RankAdapter(list, ThirdActivity.this);
             return null;
         }
 
