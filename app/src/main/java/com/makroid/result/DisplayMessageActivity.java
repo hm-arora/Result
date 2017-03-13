@@ -2,6 +2,7 @@ package com.makroid.result;
 
 import android.app.ProgressDialog;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -32,47 +33,49 @@ public class DisplayMessageActivity extends AppCompatActivity {
     ViewPager viewPager;
     ViewPagerAdapter adapter;
     String college;
-    ProgressDialog progressDialog;
-    private Handler mHandler = new Handler();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
-        progressDialog = new ProgressDialog(this);
-        progressDialog.setMessage("Processing Result ...");
-        progressDialog.show();
         Calculate();
         initToolbar();
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setOffscreenPageLimit(arrayList.size()-1);
         viewPager.setAdapter(adapter);
-        viewPager.setPageTransformer(true, new RotateDownTransformer());
+//        viewPager.setPageTransformer(true, new RotateDownTransformer());
         if(arrayList.size()<=3)
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
-        mHandler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                doHere();
-            }
-        },2000);
+        viewPager.setOffscreenPageLimit(arrayList.size()-1);
+
+            new simpleTask().execute();
     }
 
-    private void doHere() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                for (int i=1;i<=arrayList.size();i++) {
-                    Log.e(TAG,"working or not " + i);
-                    FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(0));
-                    adapter.addFragment(fragmentActivity,i +" Semester");
-                }
+    class simpleTask extends AsyncTask<Void,Void,Void>{
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            for (int i=0;i<=arrayList.size()-1;i++) {
+                Log.e(TAG,"working or not " + i);
+                FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(i));
+                adapter.addFragment(fragmentActivity,i+1 +" Semester");
                 adapter.notifyDataSetChanged();
             }
-        });
-        progressDialog.dismiss();
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            Log.e(TAG, "onPostExecute: " + "end here");
+//            progressDialog.dismiss();
+        }
     }
 
     private void initToolbar() {

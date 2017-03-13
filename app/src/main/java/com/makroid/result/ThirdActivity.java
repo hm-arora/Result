@@ -44,10 +44,6 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
         SharedPreferences settings = getSharedPreferences(JSON, 0);
-//        String FILENAME = settings.getString(link, "");
-//        if (!FILENAME.isEmpty()) {
-//            urlstirng = FILENAME;
-//        }
         toolbar = (Toolbar) findViewById(R.id.toolbar_third);
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null)
@@ -58,7 +54,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         rank_system = arrayList.get(2);
         listView = (ListView) findViewById(R.id.list_item);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
-            new ThirdAsyncTask().execute();
+        new ThirdAsyncTask().execute();
     }
 
     @Override

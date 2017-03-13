@@ -44,9 +44,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Log.e(TAG, "OnView Created");
         settings = getSharedPreferences(JSON, 0);
         setContentView(R.layout.activity_main);
-            
+
         /* call this if call from third activity */
         if (getIntent().getExtras() != null && getIntent().getExtras().containsKey("roll")) {
+            Log.e(TAG, "onCreate: This create " + getIntent().getExtras().getString("roll"));
             message = getIntent().getExtras().getString("roll");
             loadArrayList();
             Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);
@@ -92,6 +93,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
         arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
         arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
+        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
+        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
         arrayList.add(message);
     }
 
@@ -119,16 +122,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onResponse(JSONObject response) {
                         if (!settings.contains(link)) {
+                            fetch_data  = true;
                             editor = settings.edit();
                             editor.putString(link, String.valueOf(response)).apply();
                         }
                         if (!response.has(message))
-                            Toast.makeText(MainActivity.this, "Roll number not found", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Roll number not found", Toast.LENGTH_SHORT).show();
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                Toast.makeText(MainActivity.this, "DataBase Not found ", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "DataBase Not found ", Toast.LENGTH_SHORT).show();
             }
         });
         requestQueue.add(jsonObjectRequest);
@@ -174,7 +178,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             progressDialog.dismiss();
-            Log.e(TAG, "Post Execute fetch_data  " + String.valueOf(fetch_data));
+            Log.e(TAG, "Post Execute fetch_data  " + fetch_data);
             if (fetch_data) {
                 Log.e(TAG, "Second Activity starts here");
                 Intent intent = new Intent(MainActivity.this, DisplayMessageActivity.class);

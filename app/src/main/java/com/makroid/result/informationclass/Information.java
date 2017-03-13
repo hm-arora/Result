@@ -46,6 +46,7 @@ public class Information {
                 String creditPercentage = jsonObject.getJSONObject(key).getString("cPercentage");
                 String total = jsonObject.getJSONObject(key).getString("total");
                 String uRank = jsonObject.getJSONObject(key).getString("uRank");
+                newData.setRoll(key);
                 newData.setName(name);
                 newData.setCollege(college);
                 newData.setPercentage(percentage);
