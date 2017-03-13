@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 
 import com.eftimoff.viewpagertransformers.RotateDownTransformer;
+import com.makroid.result.informationclass.Information;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,17 +34,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
     ViewPager viewPager;
     ViewPagerAdapter adapter;
     String college;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display_message);
         tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         viewPager = (ViewPager) findViewById(R.id.viewpager);
+        progressDialog = new ProgressDialog(this);
+        progressDialog.setMessage("loading please wait..... ");
+        progressDialog.show();
         Calculate();
         initToolbar();
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        viewPager.setAdapter(adapter);
-//        viewPager.setPageTransformer(true, new RotateDownTransformer());
+        viewPager.setPageTransformer(true, new RotateDownTransformer());
         if(arrayList.size()<=3)
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
@@ -56,11 +60,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... voids) {
+            InformationFragment fragment = new InformationFragment().newInstance(Title,college,message);
+            adapter.addFragment(fragment,"Information0");
             for (int i=0;i<=arrayList.size()-1;i++) {
                 Log.e(TAG,"working or not " + i);
                 FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(i));
                 adapter.addFragment(fragmentActivity,i+1 +" Semester");
-                adapter.notifyDataSetChanged();
             }
             try {
                 Thread.sleep(3000);
@@ -73,8 +78,9 @@ public class DisplayMessageActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            viewPager.setAdapter(adapter);
             Log.e(TAG, "onPostExecute: " + "end here");
-//            progressDialog.dismiss();
+            progressDialog.dismiss();
         }
     }
 

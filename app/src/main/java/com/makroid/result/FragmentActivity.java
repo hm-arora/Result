@@ -120,6 +120,7 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
     private class loadData extends AsyncTask<Void, Void, Void> {
         @Override
         protected Void doInBackground(Void... voids) {
+            Log.e(TAG, "doInBackground: Starts here ");
             try {
                 message = getArguments().getString(ARG_PARAM1);
                 JsonObjectString = settings.getString(getArguments().getString(ARG_PARAM2), "");

@@ -1,5 +1,6 @@
 package com.makroid.result.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -94,8 +95,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
         public void onClick(View view) {
             Intent intent =  new Intent(context,MainActivity.class);
             intent.putExtra("roll",listData.get(getAdapterPosition()).getRoll());
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);
+            ( (Activity)(context)).finish();
         }
     }
     @Override
