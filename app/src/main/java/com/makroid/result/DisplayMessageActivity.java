@@ -48,7 +48,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setOffscreenPageLimit(arrayList.size()-1);
         viewPager.setAdapter(adapter);
-//        viewPager.setPageTransformer(true, new RotateDownTransformer());
+        viewPager.setPageTransformer(true, new RotateDownTransformer());
         if(arrayList.size()<=3)
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
