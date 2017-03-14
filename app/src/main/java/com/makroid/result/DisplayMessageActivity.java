@@ -93,7 +93,6 @@ public class DisplayMessageActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null)
             getSupportActionBar().setTitle(Title.charAt(0)+Title.substring(1).toLowerCase());
-        getSupportActionBar().setSubtitle("( "+message+" )");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
