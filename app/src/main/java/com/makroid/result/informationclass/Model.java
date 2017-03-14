@@ -33,7 +33,7 @@ public class Model {
         firstData.setcPercentage( "Credit Percentage : "+jsonObject.get("cPercentage") + " %");
         firstData.setPercentage( "Percentage : "+ jsonObject.get("percentage") + " %");
         firstData.setuRank("University Rank : "  + jsonObject.get("uRank"));
-        firstData.setTotal("Total marks Obtained : " + jsonObject.get("total") + " / " + examList.size() * 100);
+        firstData.setTotal("Total marks Obtained : " + jsonObject.get("total") + " / " + (examList.size()-1) * 100);
         firstData.setCredit("Total Credit Secured  : " + jsonObject.get("credit"));
         data.add(firstData);
         for (int i = 0; i < marks.size(); i++) {

@@ -87,14 +87,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void loadArrayList() {
         arrayList = new ArrayList<>();
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
-        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/Sem.json");
+        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/1Sem.json");
+        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/2Sem.json");
         arrayList.add(message);
     }
 

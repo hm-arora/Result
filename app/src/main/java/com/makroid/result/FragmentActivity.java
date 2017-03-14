@@ -41,6 +41,7 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
     private static final String JSON = "JSONOBJECT";
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private boolean isLoaded = false;
     List<ListItem> data;
     RecyclerView recView;
     ProgressBar progressBar;
@@ -77,7 +78,6 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
         view = inflater.inflate(R.layout.activity_display, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         recView = (RecyclerView) view.findViewById(R.id.rec_list);
-        new loadData().execute();
         return view;
     }
 
@@ -111,7 +111,13 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
+        super.setUserVisibleHint(true);
+        if (this.isVisible()) {
+            if (isVisibleToUser && !isLoaded) {
+                new loadData().execute();
+                isLoaded = true;
+            }
+        }
     }
 
     private class loadData extends AsyncTask<Void, Void, Void> {
@@ -201,4 +207,5 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
     public void onMenuItemLongClick(View clickedView, int position) {
         Toast.makeText(getActivity(), "Long clicked on position: " + position, Toast.LENGTH_SHORT).show();
     }
+
 }

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,6 +40,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
     ViewPagerAdapter adapter;
     String college;
     ProgressDialog progressDialog;
+    ArrayList<Fragment> fragmentActivities = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +52,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
         progressDialog.show();
         Calculate();
         initToolbar();
-        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         viewPager.setPageTransformer(true, new RotateDownTransformer());
         if(arrayList.size()<=3)
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
-        viewPager.setOffscreenPageLimit(arrayList.size()-1);
-
             new simpleTask().execute();
     }
 
@@ -65,12 +64,13 @@ public class DisplayMessageActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             InformationFragment fragment = new InformationFragment().newInstance(Title,college,message);
-            adapter.addFragment(fragment,"Information");
+            fragmentActivities.add(fragment);
             for (int i=0;i<=arrayList.size()-1;i++) {
                 Log.e(TAG,"working or not " + i);
                 FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(i));
-                adapter.addFragment(fragmentActivity,i+1 +" Semester");
+                fragmentActivities.add(fragmentActivity);
             }
+
             try {
                 Thread.sleep(3000);
             } catch (InterruptedException e) {
@@ -82,6 +82,8 @@ public class DisplayMessageActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
+            viewPager.setOffscreenPageLimit(fragmentActivities.size());
+            adapter = new ViewPagerAdapter(getSupportFragmentManager(),fragmentActivities);
             viewPager.setAdapter(adapter);
             Log.e(TAG, "onPostExecute: " + "end here");
             progressDialog.dismiss();
@@ -130,5 +132,18 @@ public class DisplayMessageActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+    @Override
+    public void onBackPressed() {
+
+        int count = getFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            getFragmentManager().popBackStack();
+        }
+
     }
 }
