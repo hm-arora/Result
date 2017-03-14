@@ -66,9 +66,6 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            settings = getActivity().getSharedPreferences(JSON, 0);
-        }
         fragmentManager = getActivity().getSupportFragmentManager();
         setHasOptionsMenu(true);
         initMenuFragment();
@@ -122,6 +119,7 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
         protected Void doInBackground(Void... voids) {
             Log.e(TAG, "doInBackground: Starts here ");
             try {
+                settings = getActivity().getSharedPreferences(JSON, 0);
                 message = getArguments().getString(ARG_PARAM1);
                 JsonObjectString = settings.getString(getArguments().getString(ARG_PARAM2), "");
                 try {

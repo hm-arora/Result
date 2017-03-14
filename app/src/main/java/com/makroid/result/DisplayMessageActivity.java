@@ -1,6 +1,7 @@
 package com.makroid.result;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Handler;
@@ -10,6 +11,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 import com.eftimoff.viewpagertransformers.RotateDownTransformer;
 import com.makroid.result.informationclass.Information;
@@ -61,7 +65,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         @Override
         protected Void doInBackground(Void... voids) {
             InformationFragment fragment = new InformationFragment().newInstance(Title,college,message);
-            adapter.addFragment(fragment,"Information0");
+            adapter.addFragment(fragment,"Information");
             for (int i=0;i<=arrayList.size()-1;i++) {
                 Log.e(TAG,"working or not " + i);
                 FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(i));
@@ -88,7 +92,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if(getSupportActionBar()!=null)
-            getSupportActionBar().setTitle(Title);
+            getSupportActionBar().setTitle(Title.charAt(0)+Title.substring(1).toLowerCase());
         getSupportActionBar().setSubtitle("( "+message+" )");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -112,6 +116,20 @@ public class DisplayMessageActivity extends AppCompatActivity {
             college = (String) jsonObject.get("college");
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 }

@@ -1,0 +1,93 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:id="@+id/action_container"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="5dp"
+        card_view:cardBackgroundColor="#227585"
+        card_view:cardCornerRadius="5dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/album_title_padding"
+                android:paddingRight="@dimen/album_title_padding"
+                android:paddingTop="@dimen/album_title_padding">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fff"
+                android:id="@+id/rank"
+                android:text="#1adsdsd"/>
+
+            <TextView
+                android:id="@+id/name_layout"
+                android:textColor="#fff"
+                android:gravity="center"
+                android:textStyle="bold"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="asdsdadad"
+                android:id="@+id/college"
+                android:textSize="15dp"
+
+                android:layout_marginTop="66dp"
+                />
+            <TextView
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:text="Percentage: 92 %"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/percentage"
+                android:padding="10dp"
+                android:layout_above="@+id/creditpercentage"
+                />
+            <TextView
+                android:textColor="#fff"
+                android:textSize="15dp"
+                android:text="Credit Percentage: 95%"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/creditpercentage"
+                android:padding="10dp"
+                android:layout_alignParentBottom="true"
+                />
+
+
+            <TextView
+                android:textColor="#fff"
+                android:textSize="18dp"
+                android:id="@+id/marks_layout"
+                android:text="Total Marks : 1578"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_alignTop="@+id/percentage"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="28dp" />
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
