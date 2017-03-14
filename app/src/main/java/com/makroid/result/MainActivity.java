@@ -149,6 +149,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                        if (con.getResponseCode() == HttpURLConnection.HTTP_OK) {
 //                            Log.e(TAG,"Ok or not");
                         TaskMethod(arrayList.get(i));
+                        Thread.sleep(5000);
 //                        }
 //                        else
 //                            break;
@@ -160,8 +161,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "Value " + i);
             }
             if (arrayList.size() > 1) {
-                String resposne = settings.getString(arrayList.get(0), "");
-                if (resposne.contains(message))
+                String response = settings.getString(arrayList.get(0), "");
+                if (response.contains(message))
                     fetch_data = true;
             }
             Log.e(TAG, "fetch data " + fetch_data);
@@ -193,7 +194,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             progressDialog = new ProgressDialog(MainActivity.this);
-            progressDialog.setMessage("Fetching The File....");
+            progressDialog.setMessage("Fetching The File....(Take time on first time)");
             progressDialog.show();
         }
     }

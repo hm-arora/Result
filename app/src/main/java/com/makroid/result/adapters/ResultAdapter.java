@@ -60,12 +60,12 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.marks_layout.setText(item.getmarks());
             holder.internal.setText(item.getinternal());
             holder.external.setText(item.getexternal());
-            Animation animation = AnimationUtils.loadAnimation(context,
-                    (position > lastPosition) ? R.anim.up_from_bottom
-                            : R.anim.down_from_top);
-            holder.itemView.startAnimation(animation);
-            lastPosition = position;
         }
+        Animation animation = AnimationUtils.loadAnimation(context,
+                (position > lastPosition) ? R.anim.up_from_bottom
+                        : R.anim.down_from_top);
+        customHolder.itemView.startAnimation(animation);
+        lastPosition = position;
     }
 
     @Override
