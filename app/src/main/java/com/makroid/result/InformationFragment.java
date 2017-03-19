@@ -27,16 +27,16 @@ public class InformationFragment extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.info_fragment,container,false);
-        Typeface customFont = Typeface.createFromAsset(getActivity().getAssets(),"DroidSerif-Regular.ttf");
+//        Typeface customFont = Typeface.createFromAsset(getActivity().getAssets(),"custom.ttf");
         name =  (TextView) view.findViewById(R.id.name);
         college =  (TextView) view.findViewById(R.id.college_name);
         roll =  (TextView) view.findViewById(R.id.roll);
         name.setText(getArguments().getString(ARG_PARAM1));
-        name.setTypeface(customFont);
+//        name.setTypeface(customFont);
         college.setText(getArguments().getString(ARG_PARAM2));
-        college.setTypeface(customFont);
+//        college.setTypeface(customFont);
         roll.setText(getArguments().getString(ARG_PARAM3));
-        roll.setTypeface(customFont);
+//        roll.setTypeface(customFont);
         return view;
     }
 }
