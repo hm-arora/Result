@@ -36,7 +36,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     List<RankModel> list;
     String urlstirng = "";
     String roll = "";
-    String rank_system="";
+    String rank_system = "";
     ArrayList<String> arrayList = new ArrayList<>();
 
     @Override
@@ -44,14 +44,19 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
         SharedPreferences settings = getSharedPreferences(JSON, 0);
-        toolbar = (Toolbar) findViewById(R.id.toolbar_third);
-        setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setTitle("Rank");
         arrayList = getIntent().getStringArrayListExtra("test");
-        urlstirng = settings.getString(arrayList.get(0),"");
+        urlstirng = settings.getString(arrayList.get(0), "");
         roll = arrayList.get(1);
         rank_system = arrayList.get(2);
+        toolbar = (Toolbar) findViewById(R.id.toolbar_third);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            if (rank_system.equals("overall"))
+                getSupportActionBar().setTitle("University Rank");
+            else
+                getSupportActionBar().setTitle("College Rank");
+
+        }
         listView = (ListView) findViewById(R.id.list_item);
         recyclerView = (RecyclerView) findViewById(R.id.recycler);
         new ThirdAsyncTask().execute();
@@ -81,7 +86,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
 
         @Override
         protected Void doInBackground(Void... voids) {
-            list = Information.getSortedData(urlstirng,roll,rank_system);
+            list = Information.getSortedData(urlstirng, roll, rank_system);
             rankAdapter = new RankAdapter(list, ThirdActivity.this);
             return null;
         }
@@ -127,6 +132,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
                 return super.onOptionsItemSelected(item);
         }
     }
+
     private List<RankModel> filter(List<RankModel> models, String query) {
         query = query.toLowerCase();
         final List<RankModel> filteredModelList = new ArrayList<>();
