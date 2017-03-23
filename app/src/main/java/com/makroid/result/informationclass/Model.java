@@ -1,5 +1,7 @@
 package com.makroid.result.informationclass;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -12,12 +14,13 @@ public class Model {
     public static List<ListItem> getData(String jsonObjectString, String roll) throws JSONException {
         JSONObject jsonObject = new JSONObject(jsonObjectString).getJSONObject(roll);
         JSONObject value = (JSONObject) jsonObject.get("exams");
+        Log.e("same here ", String.valueOf(value.length()));
         List<String> examList = new ArrayList<>();
         for (Iterator<String> it = value.keys(); it.hasNext(); ) {
             String key = it.next();
             examList.add(key);
         }
-
+        Log.e(" tohu ",examList.toString());
         ArrayList<String> marks = new ArrayList<>();
         ArrayList<String> internal = new ArrayList<>();
         ArrayList<String> external = new ArrayList<>();
@@ -26,14 +29,13 @@ public class Model {
             internal.add(((String) ((JSONArray) value.get(key)).get(0)).split(" ")[0]);
             external.add(((String) ((JSONArray) value.get(key)).get(0)).split(" ")[2]);
         }
-
         List<ListItem> data = new ArrayList<>();
         ListItem firstData = new ListItem();
         firstData.setcRank("College Rank : " + jsonObject.get("cRank"));
         firstData.setcPercentage( "Credit Percentage : "+jsonObject.get("cPercentage") + " %");
         firstData.setPercentage( "Percentage : "+ jsonObject.get("percentage") + " %");
         firstData.setuRank("University Rank : "  + jsonObject.get("uRank"));
-        firstData.setTotal("Total marks Obtained : " + jsonObject.get("total") + " / " + (examList.size()-1) * 100);
+        firstData.setTotal("Total marks Obtained : " + jsonObject.get("total") + " / " + (examList.size()) * 100);
         firstData.setCredit("Total Credit Secured  : " + jsonObject.get("credit"));
         data.add(firstData);
         for (int i = 0; i < marks.size(); i++) {

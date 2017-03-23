@@ -89,6 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         arrayList = new ArrayList<>();
         arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/1Sem.json");
         arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/2Sem.json");
+        arrayList.add("https://raw.githubusercontent.com/Himanshuarora97/Result/master/jsonFiles/3Sem.json");
         arrayList.add(message);
     }
 
@@ -161,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.e(TAG, "Value " + i);
             }
             if (arrayList.size() > 1) {
-                String response = settings.getString(arrayList.get(0), "");
+                String response = settings.getString(arrayList.get(2), "");
                 if (response.contains(message))
                     fetch_data = true;
             }

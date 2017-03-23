@@ -17,6 +17,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
@@ -44,12 +45,14 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
     private boolean isLoaded = false;
     List<ListItem> data;
     RecyclerView recView;
+    ImageView imageView;
     ProgressBar progressBar;
     ResultAdapter adapter;
     String message = ";";
     SharedPreferences settings;
     LinearLayoutManager llm;
     ContextMenuDialogFragment mMenuDialogFragment;
+    boolean isTrue = false;
     JSONObject jsonObject;
     String JsonObjectString = "";
     FragmentManager fragmentManager;
@@ -78,6 +81,7 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
         view = inflater.inflate(R.layout.activity_display, container, false);
         progressBar = (ProgressBar) view.findViewById(R.id.progress_bar);
         recView = (RecyclerView) view.findViewById(R.id.rec_list);
+        imageView = (ImageView) view.findViewById(R.id.image);
         return view;
     }
 
@@ -133,24 +137,32 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-                data = Model.getData(JsonObjectString,message); // used to get the data
+                data = Model.getData(JsonObjectString, message); // used to get the data
+                if (data.size() > 0)
+                    isTrue = true;
             } catch (JSONException e) {
                 e.printStackTrace();
             }
             llm = new LinearLayoutManager(getActivity());
             llm.setOrientation(LinearLayoutManager.VERTICAL);
-            adapter = new ResultAdapter(data, getActivity());
+            if (isTrue)
+                adapter = new ResultAdapter(data, getActivity());
             return null;
         }
 
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            recView.setAdapter(adapter);
-            recView.setLayoutManager(llm);
-            recView.setHasFixedSize(true);
+            if(isTrue) {
+                recView.setAdapter(adapter);
+                recView.setLayoutManager(llm);
+                recView.setHasFixedSize(true);
+            }
             progressBar.setVisibility(View.INVISIBLE);
+            if(isTrue)
             recView.setVisibility(View.VISIBLE);
+            else
+                imageView.setVisibility(View.VISIBLE);
             Log.e(TAG, "onPostExecute: FragmentActivity");
         }
 
@@ -182,15 +194,14 @@ public class FragmentActivity extends Fragment implements OnMenuItemLongClickLis
         ArrayList<String> arrayList = new ArrayList<>();
         Intent intent = new Intent(getActivity(), ThirdActivity.class);
 //        Toast.makeText(getActivity(), "Clicked on position: " + position, Toast.LENGTH_SHORT).show();
-        if(position == 1){
+        if (position == 1) {
             arrayList.add(getArguments().getString(ARG_PARAM2));
             arrayList.add(message);
             arrayList.add("overall");
             intent.putStringArrayListExtra("test", arrayList);
             startActivity(intent);
 //                getActivity().finish(); // therefore it never come after this from back button
-        }
-        else if(position==2){
+        } else if (position == 2) {
             arrayList = new ArrayList<>();
             arrayList.add(getArguments().getString(ARG_PARAM2));
             arrayList.add(message);

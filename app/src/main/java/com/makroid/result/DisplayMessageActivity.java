@@ -93,8 +93,16 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null)
-            getSupportActionBar().setTitle(Title.charAt(0)+Title.substring(1).toLowerCase());
+        if(getSupportActionBar()!=null) {
+            String name;
+            try {
+                name = Title.charAt(0) + Title.substring(1).toLowerCase();
+            }
+            catch (NullPointerException e){
+                name = "null";
+            }
+            getSupportActionBar().setTitle(name);
+        }
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
     }
@@ -104,7 +112,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         arrayList = getIntent().getExtras().getStringArrayList("message");
         if(arrayList!=null) {
             message = arrayList.get(arrayList.size() - 1);
-            String FILENAME = settings.getString(arrayList.get(0), "");
+            String FILENAME = settings.getString(arrayList.get(2), "");
             if (!FILENAME.isEmpty()) {
                 name = FILENAME;
             }
