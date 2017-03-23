@@ -21,5 +21,4 @@
         android:scrollbars="vertical"
         android:id="@+id/recycler"
         />
-
 </RelativeLayout>
