@@ -45,14 +45,16 @@ public class Information {
                 String percentage = jsonObject.getJSONObject(key).getString("percentage");
                 String creditPercentage = jsonObject.getJSONObject(key).getString("cPercentage");
                 String total = jsonObject.getJSONObject(key).getString("total");
+                String cRank = jsonObject.getJSONObject(key).getString("cRank");
                 String uRank = jsonObject.getJSONObject(key).getString("uRank");
                 newData.setRoll(key);
                 newData.setName(name);
                 newData.setCollege(college);
+                newData.setCrank("#" + cRank);
                 newData.setPercentage(percentage);
                 newData.setCreditPercentage(creditPercentage);
                 newData.setTotalMarks(total);
-                newData.setRank(uRank);
+                newData.setRank("#"+uRank);
                 data.add(newData);
             }
         }
@@ -70,13 +72,15 @@ public class Information {
             String creditPercentage = jsonObject.getJSONObject(key).getString("cPercentage");
             String total = jsonObject.getJSONObject(key).getString("total");
             String uRank = jsonObject.getJSONObject(key).getString("uRank");
+            String cRank = jsonObject.getJSONObject(key).getString("cRank");
             newData.setRoll(key);
             newData.setName(name);
             newData.setCollege(college);
             newData.setPercentage(percentage);
             newData.setCreditPercentage(creditPercentage);
             newData.setTotalMarks(total);
-            newData.setRank(uRank);
+            newData.setCrank("#"+cRank);
+            newData.setRank("#"+uRank);
             data.add(newData);
         }
         return data;

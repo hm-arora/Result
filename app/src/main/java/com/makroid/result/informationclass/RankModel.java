@@ -3,7 +3,7 @@ package com.makroid.result.informationclass;
 import java.util.Comparator;
 
 public class RankModel implements Comparator<RankModel> {
-    private String college, name, percentage, creditPercentage, totalMarks, rank, roll;
+    private String college, name, percentage, creditPercentage, totalMarks, rank, roll,crank;
 
     public String getCollege() {
         return college;
@@ -68,5 +68,13 @@ public class RankModel implements Comparator<RankModel> {
         else if (Integer.parseInt(rankModel.getRank()) < Integer.parseInt(t1.getRank()))
             return -1;
         return 0;
+    }
+
+    public String getCrank() {
+        return crank;
+    }
+
+    public void setCrank(String crank) {
+        this.crank = crank;
     }
 }

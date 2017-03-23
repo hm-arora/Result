@@ -51,6 +51,7 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
 //        });
         RankModel item = listData.get(position);
         holder.rank.setText(item.getRank());
+        holder.crank.setText(item.getCrank());
         holder.percentage.setText("Percetage : " + String.valueOf(item.getPercentage()) + "%");
         holder.creditpercentage.setText("Credit Percentage : " + String.valueOf(item.getCreditPercentage()) + "%");
         holder.name.setText(item.getName());
@@ -77,11 +78,12 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
 
     class MyHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private TextView name,marks,percentage,creditpercentage,rank,collegename;
+        private TextView name,marks,percentage,creditpercentage,rank,collegename,crank;
         private CardView cardView;
         public MyHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
+            crank = (TextView) itemView.findViewById(R.id.crank);
             rank = (TextView) itemView.findViewById(R.id.rank);
             marks = (TextView)itemView.findViewById(R.id.marks_layout);
             creditpercentage = (TextView)itemView.findViewById(R.id.creditpercentage);

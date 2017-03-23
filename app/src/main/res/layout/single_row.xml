@@ -26,25 +26,36 @@
                 android:paddingRight="@dimen/album_title_padding"
                 android:paddingTop="@dimen/album_title_padding">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="0.1"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
                 android:id="@+id/rank"
-                android:text="#1adsdsd"/>
+                android:text="#1"/>
 
             <TextView
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
                 android:id="@+id/name_layout"
                 android:textColor="#fff"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:layout_width="match_parent"
+                android:layout_weight="0.8"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:textSize="20dp"/>
-
+            <TextView
+                android:layout_weight="0.1"
+                android:text="#2"
+                android:textColor="#fff"
+                android:id="@+id/crank"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content" />
             </LinearLayout>
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
+                android:gravity="center"
                 android:layout_height="wrap_content"
                 android:text="asdsdadad"
                 android:id="@+id/college"
