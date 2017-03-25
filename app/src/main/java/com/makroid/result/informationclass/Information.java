@@ -50,11 +50,11 @@ public class Information {
                 newData.setRoll(key);
                 newData.setName(name);
                 newData.setCollege(college);
-                newData.setCrank("#" + cRank);
+                newData.setCrank(cRank);
                 newData.setPercentage(percentage);
                 newData.setCreditPercentage(creditPercentage);
                 newData.setTotalMarks(total);
-                newData.setRank("#"+uRank);
+                newData.setRank(uRank);
                 data.add(newData);
             }
         }
@@ -79,8 +79,8 @@ public class Information {
             newData.setPercentage(percentage);
             newData.setCreditPercentage(creditPercentage);
             newData.setTotalMarks(total);
-            newData.setCrank("#"+cRank);
-            newData.setRank("#"+uRank);
+            newData.setCrank(cRank);
+            newData.setRank(uRank);
             data.add(newData);
         }
         return data;

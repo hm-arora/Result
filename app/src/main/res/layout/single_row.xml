@@ -27,11 +27,11 @@
                 android:paddingTop="@dimen/album_title_padding">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.1"
+                android:layout_weight="0.18"
                 android:layout_height="wrap_content"
                 android:textColor="#fff"
                 android:id="@+id/rank"
-                android:text="#1"/>
+                android:text="#100"/>
 
             <TextView
                 android:layout_marginLeft="20dp"
@@ -45,8 +45,8 @@
                 android:layout_height="wrap_content"
                 android:textSize="20dp"/>
             <TextView
-                android:layout_weight="0.1"
-                android:text="#2"
+                android:layout_weight="0.18"
+                android:text="#200"
                 android:textColor="#fff"
                 android:id="@+id/crank"
                 android:layout_width="0dp"

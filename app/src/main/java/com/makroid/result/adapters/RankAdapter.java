@@ -36,22 +36,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
     }
     @Override
     public void onBindViewHolder(MyHolder holder, final int position) {
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Intent intent =  new Intent(context,MainActivity.class);
-//                intent.putExtra("roll",listData.get(position).getRoll());
-//                                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//
-//                context.startActivity(intent);
-////                    Intent intent = new Intent(context,DisplayMessageActivity.class);
-////                    intent.putExtra("message",listData.get(position).getRoll());
-////                    context.startActivity(intent);
-//            }
-//        });
         RankModel item = listData.get(position);
-        holder.rank.setText(item.getRank());
-        holder.crank.setText(item.getCrank());
+        holder.rank.setText("#"+item.getRank());
+        holder.crank.setText("#"+item.getCrank());
         holder.percentage.setText("Percetage : " + String.valueOf(item.getPercentage()) + "%");
         holder.creditpercentage.setText("Credit Percentage : " + String.valueOf(item.getCreditPercentage()) + "%");
         holder.name.setText(item.getName());
