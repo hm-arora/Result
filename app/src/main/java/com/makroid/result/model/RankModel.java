@@ -1,9 +1,15 @@
-package com.makroid.result.informationclass;
+package com.makroid.result.model;
 
 import java.util.Comparator;
 
+
+// Use to Store information along with their ranks to show in Rank Section
 public class RankModel implements Comparator<RankModel> {
-    private String college, name, percentage, creditPercentage, totalMarks, rank, roll,crank;
+    // Use Comparator to sort
+    // RankModel object according to creditPercentage
+    private String college, name, percentage, creditPercentage, totalMarks, rank, roll, crank;
+    // rank -> university rank
+    // crank -> college rank
 
     public String getCollege() {
         return college;
@@ -61,6 +67,15 @@ public class RankModel implements Comparator<RankModel> {
         this.roll = roll;
     }
 
+    public String getCrank() {
+        return crank;
+    }
+
+    public void setCrank(String crank) {
+        this.crank = crank;
+    }
+
+    // Comparator
     @Override
     public int compare(RankModel rankModel, RankModel t1) {
         if (Integer.parseInt(rankModel.getRank()) > Integer.parseInt(t1.getRank()))
@@ -70,11 +85,4 @@ public class RankModel implements Comparator<RankModel> {
         return 0;
     }
 
-    public String getCrank() {
-        return crank;
-    }
-
-    public void setCrank(String crank) {
-        this.crank = crank;
-    }
 }

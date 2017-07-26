@@ -9,7 +9,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.makroid.result.informationclass.ListItem;
+import com.makroid.result.model.ListItem;
 import com.makroid.result.R;
 
 import java.util.List;
@@ -20,30 +20,29 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     private int lastPosition = -1;
     private List<ListItem> listData;
     private LayoutInflater inflater;
-    public ResultAdapter(List<ListItem> dataFromlist, Context c){
+
+    public ResultAdapter(List<ListItem> listData, Context c) {
         this.context = c;
         inflater = LayoutInflater.from(c);
-        this.listData = dataFromlist;
+        this.listData = listData;
     }
+
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view;
-        if(viewType == 1) {
+        if (viewType == 1) {
             view = inflater.inflate(R.layout.score_card_layout, parent, false);
-            MyHolderSecond holderSecond = new MyHolderSecond(view);
-            return holderSecond;
-        }
-        else{
+            return new MyHolderSecond(view); // Return Second Holder object
+        } else {
             view = inflater.inflate(R.layout.list_row, parent, false);
-            MyHolder holder = new MyHolder(view);
-            return holder;
+            return new MyHolder(view); // Return MyHolder Object
         }
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder customHolder, int position) {
         ListItem item = listData.get(position);
-        if(customHolder.getItemViewType() == 1){
+        if (customHolder.getItemViewType() == 1) {
             MyHolderSecond holder;
             holder = (MyHolderSecond) customHolder;
             holder.percentage.setText(item.getPercentage());
@@ -52,8 +51,7 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.cRank.setText(item.getcRank());
             holder.credit.setText(item.getCredit());
             holder.total.setText(item.getTotal());
-        }
-            else{
+        } else {
             MyHolder holder;
             holder = (MyHolder) customHolder;
             holder.exam_layout.setText(item.getexam());
@@ -61,16 +59,20 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             holder.internal.setText(item.getinternal());
             holder.external.setText(item.getexternal());
         }
+
+
+        // animation starts
         Animation animation = AnimationUtils.loadAnimation(context,
-                (position > lastPosition) ? R.anim.up_from_bottom
-                        : R.anim.down_from_top);
+                (position > lastPosition) ? R.anim.up_from_bottom : R.anim.down_from_top);
         customHolder.itemView.startAnimation(animation);
         lastPosition = position;
+        // animation end
     }
 
+    // Used to get position in recyclerView
     @Override
     public int getItemViewType(int position) {
-        if(listData.get(position).getmarks() == null)
+        if (listData.get(position).getmarks() == null)
             return 1;
         else
             return 0;
@@ -80,20 +82,26 @@ public class ResultAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     public int getItemCount() {
         return listData.size();
     }
-    public class MyHolder extends RecyclerView.ViewHolder {
 
-        private TextView exam_layout,marks_layout,internal,external;
+
+    // Used to display marks
+    private class MyHolder extends RecyclerView.ViewHolder {
+
+        private TextView exam_layout, marks_layout, internal, external;
 
         MyHolder(View itemView) {
             super(itemView);
-            exam_layout = (TextView)itemView.findViewById(R.id.exam_layout);
-            marks_layout = (TextView)itemView.findViewById(R.id.marks_layout);
-            internal = (TextView)itemView.findViewById(R.id.internal);
-            external = (TextView)itemView.findViewById(R.id.external);
+            exam_layout = (TextView) itemView.findViewById(R.id.exam_layout);
+            marks_layout = (TextView) itemView.findViewById(R.id.marks_layout);
+            internal = (TextView) itemView.findViewById(R.id.internal);
+            external = (TextView) itemView.findViewById(R.id.external);
         }
     }
-    public class MyHolderSecond extends RecyclerView.ViewHolder{
-        private TextView percentage,cPercentage,total,credit,cRank,uRank;
+
+    // Class used to display top banner with details.
+    private class MyHolderSecond extends RecyclerView.ViewHolder {
+        private TextView percentage, cPercentage, total, credit, cRank, uRank;
+
         MyHolderSecond(View itemView) {
             super(itemView);
             percentage = (TextView) itemView.findViewById(R.id.score_percentage);

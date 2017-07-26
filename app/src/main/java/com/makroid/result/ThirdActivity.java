@@ -11,16 +11,15 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.makroid.result.informationclass.Information;
-import com.makroid.result.informationclass.RankModel;
 import com.makroid.result.adapters.RankAdapter;
+import com.makroid.result.model.Information;
+import com.makroid.result.model.RankModel;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +42,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_third);
-        SharedPreferences settings = getSharedPreferences(JSON, 0);
+        SharedPreferences settings = getSharedPreferences(getString(R.string.prefs_key), 0);
         arrayList = getIntent().getStringArrayListExtra("test");
         urlstirng = settings.getString(arrayList.get(0), "");
         roll = arrayList.get(1);
@@ -134,7 +133,7 @@ public class ThirdActivity extends AppCompatActivity implements SearchView.OnQue
     }
 
     private List<RankModel> filter(List<RankModel> models, String query) {
-        query = query.toLowerCase();
+        query = query.toLowerCase().trim(); // lowercase (free whitespace)
         final List<RankModel> filteredModelList = new ArrayList<>();
         for (RankModel model : models) {
             final String text = model.getName().toLowerCase();

@@ -1,10 +1,8 @@
 package com.makroid.result;
 
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,11 +11,9 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.eftimoff.viewpagertransformers.RotateDownTransformer;
-import com.makroid.result.informationclass.Information;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,21 +22,21 @@ import java.util.ArrayList;
 
 
 public class DisplayMessageActivity extends AppCompatActivity {
-    private static final String JSON = "JSONOBJECT";
-    private final String TAG = DisplayMessageActivity.class.getName();
-    Toolbar toolbar;
-    String Title;
-    JSONObject jsonObject;
-    ArrayList<String> arrayList;
-    String message = "";
-    SharedPreferences settings;
-    String name = "";
-    TabLayout tabLayout;
-    ViewPager viewPager;
-    ViewPagerAdapter adapter;
-    String college;
-    ProgressDialog progressDialog;
-    ArrayList<Fragment> fragmentActivities = new ArrayList<>();
+    private final String TAG = DisplayMessageActivity.class.getSimpleName();
+    private Toolbar toolbar;
+    private String Title;
+    private JSONObject jsonObject;
+    private ArrayList<String> arrayList;
+    private String message = "";
+    private SharedPreferences settings;
+    private String name = "";
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
+    private String college;
+    private ProgressDialog progressDialog;
+    private ArrayList<Fragment> fragmentActivities = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,21 +49,21 @@ public class DisplayMessageActivity extends AppCompatActivity {
         Calculate();
         initToolbar();
         viewPager.setPageTransformer(true, new RotateDownTransformer());
-        if(arrayList.size()<=3)
+        if (arrayList.size() <= 3)
             tabLayout.setTabMode(TabLayout.MODE_FIXED);
         tabLayout.setupWithViewPager(viewPager);
-            new simpleTask().execute();
+        new simpleTask().execute();
     }
 
-    class simpleTask extends AsyncTask<Void,Void,Void>{
+    class simpleTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected Void doInBackground(Void... voids) {
-            InformationFragment fragment = new InformationFragment().newInstance(Title,college,message);
+            InformationFragment fragment = new InformationFragment().newInstance(Title, college, message);
             fragmentActivities.add(fragment);
-            for (int i=0;i<=arrayList.size()-1;i++) {
-                Log.e(TAG,"working or not " + i);
-                FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message,arrayList.get(i));
+            for (int i = 0; i <= arrayList.size() - 1; i++) {
+                Log.e(TAG, "working or not " + i);
+                FragmentActivity fragmentActivity = new FragmentActivity().newInstance(message, arrayList.get(i));
                 fragmentActivities.add(fragmentActivity);
             }
 
@@ -83,7 +79,7 @@ public class DisplayMessageActivity extends AppCompatActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             viewPager.setOffscreenPageLimit(fragmentActivities.size());
-            adapter = new ViewPagerAdapter(getSupportFragmentManager(),fragmentActivities);
+            adapter = new ViewPagerAdapter(getSupportFragmentManager(), fragmentActivities);
             viewPager.setAdapter(adapter);
             Log.e(TAG, "onPostExecute: " + "end here");
             progressDialog.dismiss();
@@ -93,12 +89,11 @@ public class DisplayMessageActivity extends AppCompatActivity {
     private void initToolbar() {
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        if(getSupportActionBar()!=null) {
+        if (getSupportActionBar() != null) {
             String name;
             try {
                 name = Title.charAt(0) + Title.substring(1).toLowerCase();
-            }
-            catch (NullPointerException e){
+            } catch (NullPointerException e) {
                 name = "null";
             }
             getSupportActionBar().setTitle(name);
@@ -108,15 +103,19 @@ public class DisplayMessageActivity extends AppCompatActivity {
     }
 
     private void Calculate() {
-        settings   = getSharedPreferences(JSON, 0);
-        arrayList = getIntent().getExtras().getStringArrayList("message");
-        if(arrayList!=null) {
+        settings = getSharedPreferences(getString(R.string.prefs_key), 0);
+        arrayList = getIntent().getExtras().getStringArrayList(getString(R.string.intent_key));
+
+        if (arrayList != null) {
             message = arrayList.get(arrayList.size() - 1);
-            String FILENAME = settings.getString(arrayList.get(2), "");
-            if (!FILENAME.isEmpty()) {
-                name = FILENAME;
-            }
             arrayList.remove(arrayList.size() - 1);
+            for (int i = 0; i < arrayList.size(); i++) {
+                String FILENAME = settings.getString(arrayList.get(i), "");
+                if (!FILENAME.isEmpty() && FILENAME.contains(message)) {
+                    name = FILENAME;
+                    break;
+                }
+            }
         }
         try {
             jsonObject = new JSONObject(name);
@@ -127,10 +126,12 @@ public class DisplayMessageActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -141,11 +142,10 @@ public class DisplayMessageActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
     @Override
     public void onBackPressed() {
-
         int count = getFragmentManager().getBackStackEntryCount();
-
         if (count == 0) {
             super.onBackPressed();
             //additional code

@@ -1,73 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="horizontal">
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:padding="@dimen/show_padding"
+            android:scrollbars="none">
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
 
-        <TextView
+
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="Name :"
-            android:textSize="20dp"/>
+            android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="20dp"
-            android:text="College:"
-            android:textSize="20dp"/>
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Himanshu"
+                android:textColor="@color/black"
+                android:textSize="@dimen/student_size"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="70dp"
-            android:text="Roll Number:"
-            android:textSize="20dp"/>
-    </LinearLayout>
+            <TextView
+                android:id="@+id/branch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/name"
+                android:text="Computer Science And Engineering(CSE)"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sub_size"/>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+            <TextView
+                android:id="@+id/college_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/branch"
+                android:text="Maharaja Surajmal Institute of Technology"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/sub_size"/>
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Himanshu"
-            android:textColor="#000"
-            android:textSize="20dp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ll_margin_top"
+                android:text="@string/roll"
+                android:textColor="@color/light_blue_500"
+                android:textSize="@dimen/text_size"/>
 
-        <TextView
-            android:id="@+id/college_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Maharaja Surajmal Institute of Technology"
-            android:textColor="#000"
-            android:textSize="20dp"/>
-
-        <TextView
-            android:id="@+id/roll"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="03015002715 "
-            android:textColor="#000"
-            android:textSize="20dp"/>
-    </LinearLayout>
-
-</LinearLayout>
+            <TextView
+                android:id="@+id/roll"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="03015002715"
+                android:textColor="@color/colorPrimary"
+                android:textSize="@dimen/text_size"/>
+        </LinearLayout>
+    </RelativeLayout>
+</ScrollView>

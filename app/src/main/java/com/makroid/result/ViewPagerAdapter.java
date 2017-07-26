@@ -12,7 +12,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     private final ArrayList<Fragment> mFragments;
     private final List<String> mFragmentTitles = new ArrayList<>();
 
-    ViewPagerAdapter(FragmentManager fm,ArrayList<Fragment> list) {
+    ViewPagerAdapter(FragmentManager fm, ArrayList<Fragment> list) {
         super(fm);
         mFragments = list;
     }
@@ -34,8 +34,9 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     @Override
     public CharSequence getPageTitle(int position) {
-        if (position==0) return "Information";
+        if (position == 0)
+            return "Information";
         else
-            return position+"Semester";
+            return position + "Semester";
     }
 }

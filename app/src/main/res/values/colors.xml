@@ -10,4 +10,5 @@
     <color name="pink">#FFC0CB</color>
     <color name="white">#fff</color>
     <color name="text_color">#222222</color>
+    <color name="black">#000000</color>
 </resources>

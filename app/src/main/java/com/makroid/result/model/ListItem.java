@@ -1,4 +1,4 @@
-package com.makroid.result.informationclass;
+package com.makroid.result.model;
 
 public class ListItem {
     private String exam,marks,internal,external,percentage,cPercentage,cRank,uRank,total,credit;

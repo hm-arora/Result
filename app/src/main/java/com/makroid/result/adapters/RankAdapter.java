@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,18 +13,20 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
-import com.makroid.result.informationclass.RankModel;
+import com.makroid.result.model.RankModel;
 import com.makroid.result.MainActivity;
 import com.makroid.result.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.android.volley.VolleyLog.TAG;
+
 public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
     private List<RankModel> listData;
     private LayoutInflater inflater;
     private Context context;
-    int lastPosition = -1;
+    private int lastPosition = -1;
     public RankAdapter(List<RankModel> dataFromlist, Context c){
         this.context = c;
         inflater = LayoutInflater.from(c);
@@ -57,6 +60,9 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
     public int getItemCount() {
         return listData.size();
     }
+
+
+
     public void setFilter(List<RankModel> countryModels) {
         listData = new ArrayList<>();
         listData.addAll(countryModels);
@@ -76,13 +82,15 @@ public class RankAdapter extends RecyclerView.Adapter<RankAdapter.MyHolder> {
             creditpercentage = (TextView)itemView.findViewById(R.id.creditpercentage);
            percentage = (TextView)itemView.findViewById(R.id.percentage);
             name = (TextView)itemView.findViewById(R.id.name_layout);
-            collegename = (TextView)itemView.findViewById(R.id.college);
+            collegename = (TextView)itemView.findViewById(R.id.college_name);
             cardView = (CardView) itemView.findViewById(R.id.card_view);
         }
 
         @Override
         public void onClick(View view) {
             Intent intent =  new Intent(context,MainActivity.class);
+
+            Log.e(TAG, "onClick: " + listData.get(getAdapterPosition()).getRoll());
             intent.putExtra("roll",listData.get(getAdapterPosition()).getRoll());
 //            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             context.startActivity(intent);

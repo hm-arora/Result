@@ -2,10 +2,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/context_menu"
-        android:title="context_menu"
-        android:icon="@drawable/ic_medal"
-        android:orderInCategory="100"
-        app:showAsAction="always" />
-
+        android:id="@+id/college"
+        android:title="college rank"
+        app:showAsAction="never"/>
+    <item
+        android:id="@+id/university"
+        android:title="university rank"/>
 </menu>

@@ -22,4 +22,22 @@
     <dimen name="text_top_padding">25dp</dimen>
     <dimen name="title_text_size">26sp</dimen>
     <dimen name="tool_bar_height">56dp</dimen>
+    <dimen name="ll_margin_bottom">20dp</dimen>
+    <dimen name="ll_margin_left">20dp</dimen>
+    <dimen name="ll_margin_top">20dp</dimen>
+    <dimen name="student_size">40sp</dimen>
+    <dimen name="sub_size">16sp</dimen>
+    <dimen name="title_size">17sp</dimen>
+    <dimen name="text_size">15sp</dimen>
+    <dimen name="show_padding">20dp</dimen>
+    <dimen name="empty_image_size">100dp</dimen>
+    <dimen name="empty_textView_padding">8dp</dimen>
+    <dimen name="ll_layout_button">50dp</dimen>
+    <dimen name="register_margin">25dp</dimen>
+    <dimen name="scroll_bottom_padding">64dp</dimen>
+    <dimen name="recycler_item_margin">1dp</dimen>
+    <dimen name="del_button_size">40dp</dimen>
+    <dimen name="text_drawable_size">45dp</dimen>
+    <dimen name="list_left_margin">16dp</dimen>
+    <dimen name="trash_right_margin">10dp</dimen>
 </resources>

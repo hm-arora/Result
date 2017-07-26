@@ -10,9 +10,21 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_third"
         android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
         android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
+        android:background="@color/colorPrimary"
         app:titleTextColor="@color/white"/>
+
+    <android.support.v7.widget.Toolbar android:id="@+id/searchtoolbar"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        app:collapseIcon="@drawable/ic_arrow_back"
+        app:titleTextColor="@color/colorPrimary"
+        android:layout_alignParentTop="true"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_below="@+id/toolbar_third"
